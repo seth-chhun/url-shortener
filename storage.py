@@ -12,13 +12,18 @@ def init_db():
                 CREATE TABLE IF NOT EXISTS urls (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     code VARCHAR(10) NOT NULL UNIQUE,
-                    long_url TEXT NOT NULL,
+                    url TEXT NOT NULL,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
 
+def insert(code:str, url:str):
+    with closing(sqlite3.connect(DB_FILE)) as conn:
+        with conn:
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO urls (code, url) VALUES (?, ?)", (code, url))
+
 if __name__ == "__main__":
     init_db()
-
 
 
