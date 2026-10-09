@@ -23,6 +23,20 @@ def insert(code:str, url:str):
             cursor = conn.cursor()
             cursor.execute("INSERT INTO urls (code, url) VALUES (?, ?)", (code, url))
 
+def find_code(url:str):
+    with closing(sqlite3.connect(DB_FILE)) as conn:
+        with conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT code FROM urls WHERE url = ?", (url,))
+            return cursor.fetchone()
+
+def find_url(code:str):
+    with closing(sqlite3.connect(DB_FILE)) as conn:
+        with conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT url FROM urls WHERE code = ?", (code,))
+            return cursor.fetchone()
+
 if __name__ == "__main__":
     init_db()
 
