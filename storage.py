@@ -37,6 +37,13 @@ def find_url(code:str):
             cursor.execute("SELECT url FROM urls WHERE code = ?", (code,))
             return cursor.fetchone()
 
+def fetch_all():
+    with closing(sqlite3.connect(DB_FILE)) as conn:
+            with conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT * FROM urls")
+                return cursor.fetchall()
+
 if __name__ == "__main__":
     init_db()
 
