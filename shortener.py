@@ -7,6 +7,6 @@ def code_generator(lenght=5):
     code = "".join(secrets.choice(ALPHA) for _ in range(lenght))
     return code
 
-def shorten(link:str):
-    storage.insert(code_generator(), link)
+def shorten(url:str):
+    storage.insert(code_generator(), url)
 
