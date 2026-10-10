@@ -2,6 +2,9 @@ from flask import Flask, make_response, request, render_template, flash
 from shortener import shorten
 import storage
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
@@ -22,7 +25,9 @@ def redirect(code):
 def submit():
     url = request.form['url']
     shorten(url)
-    return "URL Added.", 201 
+    code, = storage.find_code(url)
+    flash("".join([request.base_url, code]), 'success')
+    return render_template('index.html'), 201 
 
 if __name__ == "__main__":
     storage.init_db()

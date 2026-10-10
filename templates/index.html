@@ -15,5 +15,14 @@
             <input type="text" name="url"><br>
             <input type="submit" value="Submit">
         </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash_messages">
+                    {% for category, message in messages %}
+                        <a href="{{ message }}" target="_blank">{{ message }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
     </body>
 </html>
