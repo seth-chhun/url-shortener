@@ -8,7 +8,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/GET/<code>')
+@app.route('/<code>')
 def redirect(code):
     url, = storage.find_url(code)
     response = make_response()
@@ -16,9 +16,9 @@ def redirect(code):
     response.location = url
     return response
 
-@app.route('/POST')
+@app.route('/', methods=['POST'])
 def submit():
-    url = str(request.args.get('url'))
+    url = request.form['url']
     shorten(url)
     return "URL Added.", 201 
 
