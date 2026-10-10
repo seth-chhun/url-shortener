@@ -1,8 +1,10 @@
-from flask import Flask, make_response, request, render_template
+from flask import Flask, make_response, request, render_template, flash
 from shortener import shorten
 import storage
+import os
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 
 @app.route('/')
 def index():
