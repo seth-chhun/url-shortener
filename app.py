@@ -1,8 +1,12 @@
-from flask import Flask, make_response, request
+from flask import Flask, make_response, request, render_template
 from shortener import shorten
 import storage
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/GET/<code>')
 def redirect(code):
