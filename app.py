@@ -24,8 +24,8 @@ def redirect(code):
 @app.route('/', methods=['POST'])
 def submit():
     url = request.form['url']
-    shorten(url)
-    code, = storage.find_code(url)
+    code = shorten(url)
+    storage.insert(code, url)
     flash("".join([request.base_url, code]), 'success')
     return render_template('index.html'), 201 
 

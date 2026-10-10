@@ -1,5 +1,4 @@
 import secrets
-import storage
 
 ALPHA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
@@ -8,5 +7,6 @@ def code_generator(lenght=5):
     return code
 
 def shorten(url:str):
-    storage.insert(code_generator(), url)
-
+    generated_code = code_generator()
+    
+    return generated_code
