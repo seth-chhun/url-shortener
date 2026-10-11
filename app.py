@@ -10,9 +10,25 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 
-@app.route('/')
+@app.route('/shortener', methods=['GET', 'POST'])
 def index():
+    if request.method == "POST":
+        url = check_url(request.form['url'])
+        
+        if url is None:
+            flash("Invalid URL.", 'error')
+            return redirect(request.referrer)
+        
+        url = str(url)
+        code = shorten(url)
+        
+        storage.insert(code, url)
+        flash("".join([request.url_root, code]), 'success')
+        
+        return redirect(request.referrer)
+
     return render_template('index.html')
+    
 
 @app.route('/<code>')
 def redirect_to_url(code):
@@ -21,22 +37,6 @@ def redirect_to_url(code):
     response.status_code = 302
     response.location = url
     return response
-
-@app.route('/', methods=['POST'])
-def submit():
-    url = check_url(request.form['url'])
-
-    if url is None:
-        flash("Invalid URL.", 'error')
-        return redirect(request.referrer)
-
-    url = str(url)
-    code = shorten(url)
-
-    storage.insert(code, url)
-    flash("".join([request.base_url, code]), 'success')
-
-    return redirect(request.referrer)
 
 if __name__ == "__main__": 
     storage.init_db()
