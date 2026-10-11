@@ -1,4 +1,4 @@
-from flask import Flask, make_response, request, redirect, render_template, flash, url_for
+from flask import Flask, make_response, request, redirect, render_template, flash, url_for, abort
 from shortener import shorten
 import storage
 import os
@@ -10,7 +10,7 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 
-@app.route('/shortener', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == "POST":
         url = check_url(request.form['url'])
@@ -32,11 +32,14 @@ def index():
 
 @app.route('/<code>')
 def redirect_to_url(code):
-    url, = storage.find_url(code)
-    response = make_response()
-    response.status_code = 302
-    response.location = url
-    return response
+    try:
+        url, = storage.find_url(code)
+        response = make_response()
+        response.status_code = 302
+        response.location = url
+        return response
+    except TypeError:
+        abort(404)
 
 if __name__ == "__main__": 
     storage.init_db()
