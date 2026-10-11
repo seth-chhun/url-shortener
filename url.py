@@ -12,9 +12,9 @@ def check_url(url:str):
     else:
         return None
 
-def check_web_server(url:str):
+def check_web_server(url:str, timeout:int = 3):
     try:
-        reponse = requests.head(url, timeout=3)
+        reponse = requests.head(url, timeout=timeout)
 
         if reponse.status_code < 400:
             return True

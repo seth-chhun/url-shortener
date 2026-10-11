@@ -19,7 +19,12 @@
             {% if messages %}
                 <div class="flash_messages">
                     {% for category, message in messages %}
-                        <a href="{{ message }}" target="_blank">{{ message }}</a>
+                        {% if category == 'success' %}
+                            <a href="{{ message }}" target="_blank">{{ message }}</a>
+                        {% endif %}
+                        {% if category == 'error' %}
+                            <div>{{ message }}</div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endif %}
