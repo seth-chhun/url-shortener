@@ -24,14 +24,20 @@ def redirect_to_url(code):
 
 @app.route('/', methods=['POST'])
 def submit():
-    url = request.form['url']
-    if check_url(url) is not None:
-        url = str(check_url(url))
+    url = check_url(request.form['url'])
+
+    if url is None:
+        flash("Invalid URL.", 'error')
+        return redirect(request.referrer)
+
+    url = str(url)
     code = shorten(url)
+
     storage.insert(code, url)
     flash("".join([request.base_url, code]), 'success')
+
     return redirect(request.referrer)
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     storage.init_db()
     app.run(debug=True)
