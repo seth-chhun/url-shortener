@@ -20,9 +20,12 @@ def init_db():
 def insert(code:str, url:str):
     with closing(sqlite3.connect(DB_FILE)) as conn:
         with conn:
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO urls (code, url) VALUES (?, ?)", (code, url))
-
+            try:
+                cursor = conn.cursor()
+                cursor.execute("INSERT INTO urls (code, url) VALUES (?, ?)", (code, url))
+            except sqlite3.IntegrityError:
+                return False
+            
 def find_code(url:str):
     with closing(sqlite3.connect(DB_FILE)) as conn:
         with conn:

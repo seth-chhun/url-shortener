@@ -21,8 +21,12 @@ def index():
         
         url = str(url)
         code = shorten(url)
+
+        storage_insertion = storage.insert(code, url)
         
-        storage.insert(code, url)
+        if storage_insertion == False:
+            code, = storage.find_code(url)
+
         flash("".join([request.url_root, code]), 'success')
         
         return redirect(request.referrer)

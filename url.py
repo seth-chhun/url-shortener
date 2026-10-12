@@ -18,6 +18,5 @@ def check_web_server(url:str, timeout:int = 3):
 
         if reponse.status_code < 400:
             return True
-    except requests.exceptions.RequestException as e:
-        print(e)
+    except requests.exceptions.RequestException:
         return False
