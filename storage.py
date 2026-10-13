@@ -23,8 +23,14 @@ def insert(code:str, url:str):
             try:
                 cursor = conn.cursor()
                 cursor.execute("INSERT INTO urls (code, url) VALUES (?, ?)", (code, url))
-            except sqlite3.IntegrityError:
-                return False
+            except sqlite3.IntegrityError as e:
+                violated_column = str(e).split('.')[-1]
+
+                if violated_column == "url":
+                    raise ReferenceError('collision.url')
+
+                if violated_column == "code":
+                    raise ReferenceError('collision.code')   
             
 def find_code(url:str):
     with closing(sqlite3.connect(DB_FILE)) as conn:

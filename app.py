@@ -27,13 +27,22 @@ def index():
             return redirect(request.referrer)
         
         url = str(url)
-        code = shorten(url)
 
-        storage_insertion = storage.insert(code, url)
-        
-        if storage_insertion == False:
-            code, = storage.find_code(url)
+        while True:
+            code = shorten(url)
+            try:
+                storage.insert(code, url)
+                break
+            except ReferenceError as e:
+                violation = str(e)
+                print(violation)
 
+                if violation == "collision.url":
+                    code, = storage.find_code(url)
+                    break
+                elif violation == "collision.code":
+                    continue
+                    
         flash("".join([request.url_root, code]), 'success')
         
         return redirect(request.referrer)
