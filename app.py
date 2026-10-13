@@ -15,12 +15,14 @@ app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 def index():
     if request.method == "POST":
         try:
-            url = check_url(request.form['url'])
+            url = check_url(request.form['url'], request.root_url)
         except urllib3.exceptions.LocationParseError:
-            flash("Invalid URL.", 'error')
+            flash("URL too long.", 'error')
             return redirect(request.referrer)
-        
-        if url is None:
+        except RecursionError:
+            flash("Self-Referencing is not allow.", 'error')
+            return redirect(request.referrer)
+        except TimeoutError:
             flash("Invalid URL.", 'error')
             return redirect(request.referrer)
         
