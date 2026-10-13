@@ -4,6 +4,7 @@ import storage
 import os
 from dotenv import load_dotenv
 from url import check_url
+import urllib3
 
 load_dotenv()
 
@@ -13,7 +14,11 @@ app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == "POST":
-        url = check_url(request.form['url'])
+        try:
+            url = check_url(request.form['url'])
+        except urllib3.exceptions.LocationParseError:
+            flash("Invalid URL.", 'error')
+            return redirect(request.referrer)
         
         if url is None:
             flash("Invalid URL.", 'error')
