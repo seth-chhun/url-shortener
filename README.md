@@ -1,6 +1,6 @@
 # 🔗 url-shortener
 
-A simple link shortener built with **Flask** and **SQLite** — my first full-stack web project!
+A simple link shortener built with **Flask** and **SQLite** – my first full-stack web project!
 
 Turn long, ugly URLs into short, shareable links. Built from scratch to understand how the web actually works.
 
@@ -21,10 +21,10 @@ This is my **first web development project**. I built it to answer a simple ques
 From this project, I have learned alot including:
 
 - **How link shorteners work** under the hood (generate short codes → store mapping → redirect on visit)
-- **How web protocols work** : the request/response cycle, HTTP status codes (especially `301` and `302` redirects)
-- **How routing works** in web frameworks : dynamic URL parameters like `/<code>`
-- **How to use Flask** : request handling and templating(for flash())
--  **How storage works** : designing a schema, using SQLite, and querying with SQL
+- **How web protocols work** – the request/response cycle, HTTP status codes (especially `301` and `302` redirects)
+- **How routing works** in web frameworks – dynamic URL parameters like `/<code>`
+- **How to use Flask** – request handling and templating(for flash())
+-  **How storage works** – designing a schema, using SQLite, and querying with SQL
 
 ---
 
@@ -119,10 +119,10 @@ This is a learning project, but feedback is welcome! Feel free to open an issue 
 ---
 
 ### 📄 License
-MIT
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
 ### 🙏 Acknowledgments
-Google Gemini for being the first want to reach out when I search on Google.
+Google Gemini for being the first one to reach out when I search on Google.
 
