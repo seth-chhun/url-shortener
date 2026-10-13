@@ -9,6 +9,8 @@ Turn long, ugly URLs into short, shareable links. Built from scratch to understa
 ![SQLite](https://img.shields.io/badge/SQLite-3-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+![example](/image/example.png)
+
 ---
 
 ## 📖 About
@@ -55,7 +57,7 @@ From this project, I have learned alot including:
 1. **Clone the repo**
    ```bash
    git clone https://github.com/yourusername/flask-link-shortener.git
-   cd flask-link-shortener
+   cd url-shortener
 
 2. **Create a virtual environment**
     ```bash
@@ -89,12 +91,6 @@ From this project, I have learned alot including:
 
 ---
 
-## 📸 Screenshots
-
-![example](/image/example.png)
-
----
-
 ### 🗺️ Future Improvements
 - User accounts and custom short codes
 - Click analytics dashboard
@@ -124,6 +120,8 @@ This is a learning project, but feedback is welcome! Feel free to open an issue 
 
 ### 📄 License
 MIT
+
+---
 
 ### 🙏 Acknowledgments
 Google Gemini for being the first want to reach out when I search on Google.
