@@ -9,7 +9,7 @@ Turn long, ugly URLs into short, shareable links. Built from scratch to understa
 ![SQLite](https://img.shields.io/badge/SQLite-3-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-![example](/image/example.png)
+<img width="1891" height="597" alt="example" src="https://github.com/user-attachments/assets/4b5dbbf6-081f-4833-8db6-2b77058afffa" />
 
 ---
 
@@ -56,7 +56,7 @@ From this project, I have learned alot including:
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/yourusername/flask-link-shortener.git
+   git clone https://github.com/yourusername/url-shortener.git
    cd url-shortener
 
 2. **Create a virtual environment**
